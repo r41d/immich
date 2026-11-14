@@ -16,6 +16,7 @@ abstract class TimelineConfig with _$TimelineConfig {
     @Default(true) bool rawIndicator,
     @Default(true) bool stackIndicator,
     @Default(true) bool favoriteIndicator,
+    @Default(true) bool otherOwnerIndicator,
     @Default(false) bool smoothScrubbing,
   }) = _TimelineConfig;
 }

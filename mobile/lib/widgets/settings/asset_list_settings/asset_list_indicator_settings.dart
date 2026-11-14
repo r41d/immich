@@ -22,6 +22,7 @@ class IndicatorSettings extends HookConsumerWidget {
     final rawIndicator = useValueNotifier(timelineConfig.rawIndicator);
     final stackIndicator = useValueNotifier(timelineConfig.stackIndicator);
     final favoriteIndicator = useValueNotifier(timelineConfig.favoriteIndicator);
+    final otherOwnerIndicator = useValueNotifier(timelineConfig.otherOwnerIndicator);
 
     SettingsSwitchListTile indicatorSwitch(ValueNotifier<bool> notifier, SettingsKey<bool> key, String title) {
       return SettingsSwitchListTile(
@@ -69,6 +70,11 @@ class IndicatorSettings extends HookConsumerWidget {
           favoriteIndicator,
           .timelineFavoriteIndicator,
           context.t.theme_setting_asset_list_favorite_indicator_title,
+        ),
+        indicatorSwitch(
+          otherOwnerIndicator,
+          .timelineOtherOwnerIndicator,
+          context.t.theme_setting_asset_list_other_owner_indicator_title,
         ),
       ],
     );

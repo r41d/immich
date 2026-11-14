@@ -12,6 +12,7 @@ import 'package:immich_mobile/providers/asset_viewer/asset_viewer.provider.dart'
 import 'package:immich_mobile/providers/backup/asset_upload_progress.provider.dart';
 import 'package:immich_mobile/providers/infrastructure/settings.provider.dart';
 import 'package:immich_mobile/providers/timeline/multiselect.provider.dart';
+import 'package:immich_mobile/providers/user.provider.dart';
 
 class ThumbnailTile extends ConsumerStatefulWidget {
   const ThumbnailTile(
@@ -64,6 +65,13 @@ class _ThumbnailTileState extends ConsumerState<ThumbnailTile> {
 
     final timelineConfig = ref.watch(appConfigProvider.select((s) => s.timeline));
     final bool storageIndicator = timelineConfig.storageIndicator && widget.showStorageIndicator;
+    final currentUserId = ref.watch(currentUserProvider.select((user) => user?.id));
+    final showFavorite = asset != null && asset.isFavorite && timelineConfig.favoriteIndicator;
+    final showOtherOwner =
+        asset is RemoteAsset &&
+        currentUserId != null &&
+        asset.ownerId != currentUserId &&
+        timelineConfig.otherOwnerIndicator;
 
     if (!isCurrentAsset) {
       _hideIndicators = false;
@@ -185,15 +193,22 @@ class _ThumbnailTileState extends ConsumerState<ThumbnailTile> {
                     },
                   ),
 
-                if (asset != null && asset.isFavorite && timelineConfig.favoriteIndicator)
+                if (showFavorite || showOtherOwner)
                   AnimatedOpacity(
                     duration: Durations.short4,
                     opacity: _hideIndicators ? 0.0 : 1.0,
-                    child: const Align(
+                    child: Align(
                       alignment: Alignment.bottomLeft,
                       child: Padding(
-                        padding: EdgeInsets.only(left: 10.0, bottom: 6.0),
-                        child: _TileOverlayIcon(Icons.favorite_rounded),
+                        padding: const EdgeInsets.only(left: 10.0, bottom: 6.0),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          spacing: 3,
+                          children: [
+                            if (showFavorite) const _TileOverlayIcon(Icons.favorite_rounded),
+                            if (showOtherOwner) const _TileOverlayIcon(Icons.people_outline_rounded),
+                          ],
+                        ),
                       ),
                     ),
                   ),

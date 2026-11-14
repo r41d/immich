@@ -2224,6 +2224,7 @@
   "theme_setting_asset_list_animated_image_indicator_title": "Show animated image indicator on asset tiles",
   "theme_setting_asset_list_favorite_indicator_title": "Show favorite indicator on asset tiles",
   "theme_setting_asset_list_live_photo_indicator_title": "Show live photo indicator on asset tiles",
+  "theme_setting_asset_list_other_owner_indicator_title": "Show indicator on assets owned by others",
   "theme_setting_asset_list_raw_indicator_title": "Show RAW indicator on asset tiles",
   "theme_setting_asset_list_smooth_scrubbing_subtitle": "Scroll continuously when dragging the scrollbar instead of snapping to months",
   "theme_setting_asset_list_smooth_scrubbing_title": "Smooth timeline scrubbing",

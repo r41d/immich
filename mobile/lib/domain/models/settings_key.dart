@@ -54,6 +54,7 @@ enum SettingsKey<T> {
   timelineRawIndicator<bool>(),
   timelineStackIndicator<bool>(),
   timelineFavoriteIndicator<bool>(),
+  timelineOtherOwnerIndicator<bool>(),
   timelineSmoothScrubbing<bool>(),
 
   // Log
